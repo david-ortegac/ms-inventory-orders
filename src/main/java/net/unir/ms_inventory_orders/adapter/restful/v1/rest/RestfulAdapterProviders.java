@@ -3,7 +3,6 @@ package net.unir.ms_inventory_orders.adapter.restful.v1.rest;
 import jakarta.validation.Valid;
 import net.unir.ms_inventory_orders.adapter.restful.v1.mappers.AdapterOdersMapper;
 import net.unir.ms_inventory_orders.adapter.restful.v1.models.OrdersAdapterDTO;
-import net.unir.ms_inventory_orders.adapter.restful.v1.models.SearchParams;
 import net.unir.ms_inventory_orders.aplication.ApplicationServiceOders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,8 +22,8 @@ public class RestfulAdapterProviders {
     private ApplicationServiceOders serviceProviders;
 
     @GetMapping
-    public ResponseEntity<List<OrdersAdapterDTO>> getAllProviders(SearchParams params) {
-        return new ResponseEntity<>(mapper.fromDomainToAdapterList(serviceProviders.getAll(params.getProvider(), params.getProduct(), params.getAmount() )), HttpStatus.OK);
+    public ResponseEntity<List<OrdersAdapterDTO>> getAllProviders(@RequestParam(required = false) Integer provider, @RequestParam(required = false) Integer product, @RequestParam(required = false) Integer amount) {
+        return new ResponseEntity<>(mapper.fromDomainToAdapterList(serviceProviders.getAll(provider, product, amount )), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

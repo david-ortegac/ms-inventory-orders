@@ -41,13 +41,13 @@ public class OrdersRepositoryJPAImp implements OdersRepositoryDomain {
     public List<OrdersDomainDTO> search(Integer idProduct, Integer idProvider, Integer amount) {
         SearchCriteria<OrdersJPA> spec = new SearchCriteria<>();
 
-        if (null!=idProvider) {
-            spec.add(new SearchStatement("idProvider", idProvider, SearchOperation.MATCH));
+        if (null!=idProvider && idProvider>0) {
+            spec.add(new SearchStatement("idProvider", idProvider, SearchOperation.EQUAL));
         }
-        if (null != idProduct) {
+        if (null != idProduct && idProduct>0) {
             spec.add(new SearchStatement("idProduct", idProduct, SearchOperation.EQUAL));
         }
-        if (amount > 0) {
+        if (null!= amount && amount > 0) {
             spec.add(new SearchStatement("amount", amount, SearchOperation.EQUAL));
         }
 

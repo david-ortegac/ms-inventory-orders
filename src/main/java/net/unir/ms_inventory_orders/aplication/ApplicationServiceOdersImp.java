@@ -118,6 +118,12 @@ class ApplicationServiceOdersImp implements ApplicationServiceOders {
 
     @Override
     public OrdersDomainDTO deleteProvider(Long id) {
-        return repositoryDomain.delete(id);
+        OrdersDomainDTO res = repositoryDomain.delete(id);
+        ProductsDomainDTO productById = this.getProductById(res.getProduct().id);
+        ProvidersDomainDTO providerById = this.getProviderById(res.getProvider().id);
+        res.setProduct(productById);
+        res.setProvider(providerById);
+
+        return res;
     }
 }
