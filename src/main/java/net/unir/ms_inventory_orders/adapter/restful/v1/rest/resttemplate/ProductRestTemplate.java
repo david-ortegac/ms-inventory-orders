@@ -15,7 +15,7 @@ public class ProductRestTemplate {
     private RestTemplate restTemplate;
 
     public ProductsAdapterDTO getProductById(Long id){
-        ResponseEntity<ProductsAdapterDTO> product = restTemplate.getForEntity("http://localhost:8087/api/v1/productos/"+id, ProductsAdapterDTO.class);
+        ResponseEntity<ProductsAdapterDTO> product = restTemplate.getForEntity("http://localhost:8087/products/"+id, ProductsAdapterDTO.class);
         return product.getBody();
     }
 }
