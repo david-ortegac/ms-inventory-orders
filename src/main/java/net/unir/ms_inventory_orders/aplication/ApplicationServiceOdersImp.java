@@ -47,7 +47,14 @@ class ApplicationServiceOdersImp implements ApplicationServiceOders {
         if ((null != product && product > 0)
                 || (null != provider && provider > 0)
                 || (null != amount && amount > 0)) {
-            return mapper.fromAdapterToDomainList(mapper.fromDomainToAdapterList(repositoryDomain.search(product, provider, amount)));
+            List<OrdersDomainDTO> orders = repositoryDomain.search(product, provider, amount);
+            orders.forEach(res -> {
+                ProductsDomainDTO productById = this.getProductById(res.getProduct().id);
+                ProvidersDomainDTO providerById = this.getProviderById(res.getProvider().id);
+                res.setProduct(productById);
+                res.setProvider(providerById);
+            });
+            return mapper.fromAdapterToDomainList(mapper.fromDomainToAdapterList(orders));
         }
 
         List<OrdersDomainDTO> orders = repositoryDomain.getAll();

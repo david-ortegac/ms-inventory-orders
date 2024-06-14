@@ -9,20 +9,9 @@ import lombok.Setter;
 @Setter
 public class ProductsDomainDTO {
     public Long id;
-
-    @Valid
-    @NotNull
-    public String name;
-
-    @Valid
-    @NotNull
-    public String description;
-
-    @Valid
-    @NotNull
-    public Double price;
-
-    @Valid
-    @NotNull
-    public int amount;
+    private String name;
+    private String category;
+    private String manufacturer;
+    private int guarantyMonths;
+    private int price;
 }
